@@ -1,0 +1,13 @@
+:root {
+  background-color: #3a6ea5;
+  min-height: 100vh;
+  overflow: hidden;
+  zoom: 1.2;
+}
+
+#app {
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
