@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "HelveticaNeue";
+  src: url("assets/fonts/HelveticaNeueBold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "HelveticaNeue";
+  src: url("assets/fonts/HelveticaNeueRoman.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+#root {
+  height: 100vh;
+}
+
+@theme {
+  --color-main: #364738;
+  --font-helvetica: "HelveticaNeue", sans-serif;
+}
