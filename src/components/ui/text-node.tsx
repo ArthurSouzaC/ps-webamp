@@ -1,17 +1,27 @@
 import { Handle, Position } from "@xyflow/react";
+import { useWindowManager } from "../../hooks/useWindowManager";
 
 interface TextNodeProps {
   data: {
     name: string;
-    onClick: (id: string) => void;
   };
 }
 
 export const TextNode = ({ data }: TextNodeProps) => {
-  const { name, onClick } = data;
+  const { name } = data;
+
+  const { isOpen, bringToFront, openWindow } = useWindowManager();
+
+  const onClick = () => {
+    if (isOpen(name)) {
+      bringToFront(name);
+    } else {
+      openWindow(name);
+    }
+  };
 
   return (
-    <div onClick={() => onClick(name)} className="cursor-pointer">
+    <button onClick={onClick} className="cursor-pointer">
       <span className="font-helvetica font-bold uppercase text-[20px]">
         {name}
       </span>
@@ -28,6 +38,6 @@ export const TextNode = ({ data }: TextNodeProps) => {
         className="opacity-0"
         isConnectable={false}
       />
-    </div>
+    </button>
   );
 };

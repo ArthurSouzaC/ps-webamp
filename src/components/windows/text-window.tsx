@@ -1,33 +1,27 @@
 import { useRef } from "react";
 import { useDraggable } from "@reactuses/core";
+import { useWindowManager } from "../../hooks/useWindowManager";
 
 interface TextProps {
-  initialPosition?: {
-    x: number;
-    y: number;
-  };
   name: string;
   textItem: string;
 }
 
-const defaultInitialPosition = {
-  x: window.innerWidth / 2,
-  y: window.innerHeight / 2,
-};
-
-export const TextWindow = ({
-  initialPosition = defaultInitialPosition,
-  name,
-  textItem,
-}: TextProps) => {
+export const TextWindow = ({ name, textItem }: TextProps) => {
   const el = useRef<HTMLDivElement>(null);
   const scope = useRef<HTMLDivElement>(null);
 
+  const { windows, closeWindow } = useWindowManager();
+
   const [x, y] = useDraggable(el, {
-    initialValue: initialPosition,
+    initialValue: windows[name].position,
     preventDefault: true,
     containerElement: scope,
   });
+
+  const close = () => {
+    closeWindow(name);
+  };
 
   return (
     <div
@@ -44,7 +38,10 @@ export const TextWindow = ({
         <span className="font-helvetica font-bold uppercase py-2.5 px-4 text-sm">
           {name}
         </span>
-        <button className="border-x-2 border-r-0 border-black px-3 py-2 cursor-pointer">
+        <button
+          className="border-x-2 border-r-0 border-black px-3 py-2 cursor-pointer"
+          onClick={close}
+        >
           <span className="font-helvetica font-bold uppercase inline-block scale-y-200 text-sm">
             fechar
           </span>
