@@ -16,9 +16,11 @@ import { DirectoryWindow } from "../components/windows/directory-window";
 import { TextWindow } from "../components/windows/text-window";
 import { useWindowManager } from "../hooks/useWindowManager";
 import { shortcuts, shortcutsEdges } from "../data/shortcuts";
-import { docsEdges, docsNodes } from "../data/docs";
+import { docsEdges, docsNodes, imgsEdges, imgsNodes } from "../data/docs";
 import Vitral from "../assets/images/vitral.svg";
+import { LittleBible } from "../components/windows/bible-window";
 import { articles } from "../data/articles";
+import { ImageWindow } from "../components/windows/image-window";
 
 export const Main = () => {
   const [nodes, setNodes] = useState<Node[]>(shortcuts);
@@ -95,9 +97,24 @@ export const Main = () => {
           initialEdges={docsEdges}
         />
       )}
+      {isOpen("imgs") && (
+        <NodesWindow
+          name="imgs"
+          icon="camera"
+          initialNodes={imgsNodes}
+          initialEdges={imgsEdges}
+        />
+      )}
       {isOpen("refs") && <DirectoryWindow name="refs" icon="bookmark" />}
+      {isOpen("biblinha") && <LittleBible name="biblinha" icon="bookopened" />}
       {isOpen("esperança.txt") && (
         <TextWindow name="esperança.txt" textItem={articles["esperança.txt"]} />
+      )}
+      {isOpen("producao_caseira_da_casa.gif") && (
+        <ImageWindow
+          name="producao_caseira_da_casa.gif"
+          imageName="producao_caseira_da_casa"
+        />
       )}
     </section>
   );
