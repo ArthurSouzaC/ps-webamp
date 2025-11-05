@@ -87,7 +87,7 @@ export const Window = ({
     {
       id: "poema",
       type: "text-node",
-      position: { x: 100, y: 150 },
+      position: { x: 50, y:80 },
       data: {
         name: "poema.txt",
         onClick: onClickShortcut,
@@ -132,9 +132,9 @@ export const Window = ({
         top: y,
         zIndex: 10,
       }}
-      className="border-2 border-black flex flex-row bg-main"
+      className="border-2 border-black flex flex-row bg-main cursor-pointer"
     >
-      <div className="border-t-2 border-l-2 border-b-2 border-black ml-8 my-[42px]">
+      <div className="border-t-2 border-l-2 border-b-2 border-black ml-8 my-[42px] cursor-default">
         <div className="border-r-2 border-black w-[380px] h-[280px]">
           <ReactFlow
             nodeTypes={nodeTypes}
@@ -149,6 +149,11 @@ export const Window = ({
             panOnDrag={false}
             draggable={false}
             elementsSelectable={false}
+            viewport={{
+              x: 0,
+              y: 0,
+              zoom: 1,
+            }}
             proOptions={{
               hideAttribution: true,
             }}
