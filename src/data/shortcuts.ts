@@ -4,7 +4,7 @@ export const shortcuts: Node[] = [
   {
     id: "play",
     type: "shortcut",
-    position: { x: 100, y: 50 },
+    position: { x: 100, y: 25 },
     data: {
       name: "play",
       icon: "note",
@@ -13,7 +13,7 @@ export const shortcuts: Node[] = [
   {
     id: "docs",
     type: "shortcut",
-    position: { x: 200, y: 175 },
+    position: { x: 200, y: 150 },
     data: {
       name: "docs",
       icon: "file",
@@ -22,7 +22,7 @@ export const shortcuts: Node[] = [
   {
     id: "imgs",
     type: "shortcut",
-    position: { x: 100, y: 300 },
+    position: { x: 100, y: 275 },
     data: {
       name: "imgs",
       icon: "camera",
@@ -31,7 +31,7 @@ export const shortcuts: Node[] = [
   {
     id: "refs",
     type: "shortcut",
-    position: { x: 200, y: 425 },
+    position: { x: 200, y: 400 },
     data: {
       name: "refs",
       icon: "bookmark",
@@ -40,7 +40,7 @@ export const shortcuts: Node[] = [
   {
     id: "biblinha",
     type: "shortcut",
-    position: { x: 100, y: 550 },
+    position: { x: 100, y: 525 },
     data: {
       name: "biblinha",
       icon: "bookopened",

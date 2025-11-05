@@ -14,11 +14,11 @@ import { Shortcut } from "../components/ui/shortcut";
 import { NodesWindow } from "../components/windows/nodes-window";
 import { DirectoryWindow } from "../components/windows/directory-window";
 import { TextWindow } from "../components/windows/text-window";
-import { textItens } from "../constants";
 import { useWindowManager } from "../hooks/useWindowManager";
 import { shortcuts, shortcutsEdges } from "../data/shortcuts";
 import { docsEdges, docsNodes } from "../data/docs";
 import Vitral from "../assets/images/vitral.svg";
+import { articles } from "../data/articles";
 
 export const Main = () => {
   const [nodes, setNodes] = useState<Node[]>(shortcuts);
@@ -96,8 +96,8 @@ export const Main = () => {
         />
       )}
       {isOpen("refs") && <DirectoryWindow name="refs" icon="bookmark" />}
-      {isOpen("esperanca.txt") && (
-        <TextWindow name="esperança.txt" textItem={textItens[0]} />
+      {isOpen("esperança.txt") && (
+        <TextWindow name="esperança.txt" textItem={articles["esperança.txt"]} />
       )}
     </section>
   );

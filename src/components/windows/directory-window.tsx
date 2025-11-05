@@ -7,8 +7,8 @@ import CameraIcon from "../../assets/icons/camera-photo.svg";
 import FileIcon from "../../assets/icons/file.svg";
 import NoteIcon from "../../assets/icons/note.svg";
 import { DirectoryChildren } from "../ui/directory-children";
-import { directoryItens } from "../../constants";
 import { useWindowManager } from "../../hooks/useWindowManager";
+import { directories } from "../../data/directories";
 
 interface DirectoryProps {
   name: string;
@@ -54,8 +54,8 @@ export const DirectoryWindow = ({ name, icon }: DirectoryProps) => {
     >
       <div className="border-t-2 border-l-2 border-b-2 border-r-2 border-black ml-8 my-[42px] cursor-default">
         <div className="border-black w-[380px] py-9 pl-5 gap-5 flex flex-col">
-          <DirectoryChildren data={directoryItens[0]} />
-          <DirectoryChildren data={directoryItens[1]} />
+          <DirectoryChildren data={directories["books"]} />
+          <DirectoryChildren data={directories["music"]} />
         </div>
       </div>
       <div className="flex flex-col justify-between pb-14">
