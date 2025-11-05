@@ -10,8 +10,6 @@ interface TextNodeProps {
 export const TextNode = ({ data }: TextNodeProps) => {
   const { name, onClick } = data;
 
-  console.log(name);
-  
   return (
     <div onClick={() => onClick(name)} className="cursor-pointer">
       <span className="font-helvetica font-bold uppercase text-[20px]">

@@ -1,7 +1,5 @@
 import { useRef } from "react";
 import { useDraggable } from "@reactuses/core";
-import { DirectoryChildren } from "../ui/directory-children";
-import { directoryItens } from "../../constants";
 
 interface TextProps {
   initialPosition?: {
@@ -17,7 +15,7 @@ const defaultInitialPosition = {
   y: window.innerHeight / 2,
 };
 
-export const Text = ({
+export const TextWindow = ({
   initialPosition = defaultInitialPosition,
   name,
   textItem,
@@ -29,7 +27,6 @@ export const Text = ({
     initialValue: initialPosition,
     preventDefault: true,
     containerElement: scope,
-    exact: true,
   });
 
   return (
@@ -43,20 +40,22 @@ export const Text = ({
       }}
       className="border-2 border-black bg-main cursor-pointer"
     >
-        <div ref={el} className="flex border-y-2 border-t-0 justify-between">
-        <span className="font-helvetica font-bold uppercase py-2.5 px-4 text-sm">{name}</span>
-          <button className="border-x-2 border-r-0 border-black px-3 py-2 cursor-pointer">
-            <span className="font-helvetica font-bold uppercase inline-block scale-y-200 text-sm">
-              fechar
-            </span>
-          </button>
-        </div>
-        <div className="m-5 cursor-default bg-[#A5A690] w-[380px] pt-6 pb-10 px-3 gap-5 flex flex-col">
-            <span
-              dangerouslySetInnerHTML={{ __html: textItem }}
-              className="text-xs font-times"
-            ></span>
-          </div>
+      <div className="flex border-y-2 border-t-0 justify-between">
+        <span className="font-helvetica font-bold uppercase py-2.5 px-4 text-sm">
+          {name}
+        </span>
+        <button className="border-x-2 border-r-0 border-black px-3 py-2 cursor-pointer">
+          <span className="font-helvetica font-bold uppercase inline-block scale-y-200 text-sm">
+            fechar
+          </span>
+        </button>
+      </div>
+      <div className="m-5 cursor-default bg-[#A5A690] w-[380px] pt-6 pb-10 px-3 gap-5 flex flex-col">
+        <span
+          dangerouslySetInnerHTML={{ __html: textItem }}
+          className="text-xs font-times"
+        ></span>
+      </div>
     </div>
   );
 };

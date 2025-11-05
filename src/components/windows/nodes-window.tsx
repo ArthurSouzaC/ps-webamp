@@ -1,11 +1,6 @@
 import { useCallback, useRef, useState } from "react";
 import { useDraggable } from "@reactuses/core";
-import BookIcon from "../../assets/icons/book.svg";
-import BookmarkIcon from "../../assets/icons/bookmark.svg";
-import BookopenedIcon from "../../assets/icons/bookopened.svg";
-import CameraIcon from "../../assets/icons/camera-photo.svg";
-import FileIcon from "../../assets/icons/file.svg";
-import NoteIcon from "../../assets/icons/note.svg";
+
 import {
   applyEdgeChanges,
   applyNodeChanges,
@@ -17,6 +12,8 @@ import {
   type NodeChange,
 } from "@xyflow/react";
 import { TextNode } from "../ui/text-node";
+import { useWindowManager } from "../../hooks/useWindowManager";
+import { iconMap } from "../../data/icons";
 
 interface WindowProps {
   initialPosition?: {
@@ -25,21 +22,9 @@ interface WindowProps {
   };
   name: string;
   icon: string;
+  initialNodes: Node[];
+  initialEdges: Edge[];
 }
-
-const defaultInitialPosition = {
-  x: window.innerWidth / 2,
-  y: window.innerHeight / 2,
-};
-
-const iconMap: { [key: string]: string } = {
-  book: BookIcon,
-  bookmark: BookmarkIcon,
-  bookopened: BookopenedIcon,
-  camera: CameraIcon,
-  file: FileIcon,
-  note: NoteIcon,
-};
 
 const nodeTypes = {
   "text-node": TextNode,
@@ -49,66 +34,25 @@ const edgeTypes = {
   "straight-edge": StraightEdge,
 };
 
-export const Window = ({
-  initialPosition = defaultInitialPosition,
+export const NodesWindow = ({
   name,
   icon,
+  initialNodes,
+  initialEdges,
 }: WindowProps) => {
   const el = useRef<HTMLDivElement>(null);
   const scope = useRef<HTMLDivElement>(null);
 
+  const { windows, closeWindow } = useWindowManager();
+
   const [x, y] = useDraggable(el, {
-    initialValue: initialPosition,
+    initialValue: windows[name].position,
     preventDefault: true,
     containerElement: scope,
     exact: true,
   });
 
-  const [openedWindows, setOpenedWindows] = useState<string[]>([]);
-
-  const onClickShortcut = (id: string) => {
-    const isAlreadyOpened = openedWindows.includes(id);
-
-    if (!isAlreadyOpened) {
-      setOpenedWindows([...openedWindows, id]);
-    }
-  };
-
-  const initialNodes: Node[] = [
-    {
-      id: "esperanca",
-      type: "text-node",
-      position: { x: 0, y: 0 },
-      data: {
-        name: "esperança.txt",
-        onClick: onClickShortcut,
-      },
-    },
-    {
-      id: "poema",
-      type: "text-node",
-      position: { x: 50, y:80 },
-      data: {
-        name: "poema.txt",
-        onClick: onClickShortcut,
-      },
-    },
-  ];
-
   const [nodes, setNodes] = useState<Node[]>(initialNodes);
-
-  const initialEdges: Edge[] = [
-    {
-      id: "esperanca-poema",
-      type: "straight-edge",
-      source: "esperanca",
-      target: "poema",
-      style: {
-        stroke: "#000",
-      },
-    },
-  ];
-
   const [edges, setEdges] = useState<Edge[]>(initialEdges);
 
   const onNodesChange = useCallback(
@@ -123,6 +67,10 @@ export const Window = ({
     []
   );
 
+  const close = () => {
+    closeWindow(name);
+  };
+
   return (
     <div
       ref={el}
@@ -130,7 +78,7 @@ export const Window = ({
         position: "absolute",
         left: x,
         top: y,
-        zIndex: 10,
+        zIndex: windows[name].zIndex,
       }}
       className="border-2 border-black flex flex-row bg-main cursor-pointer"
     >
@@ -147,8 +95,11 @@ export const Window = ({
             maxZoom={1}
             minZoom={1}
             panOnDrag={false}
-            draggable={false}
             elementsSelectable={false}
+            nodeExtent={[
+              [10, 0],
+              [370, 280],
+            ]}
             viewport={{
               x: 0,
               y: 0,
@@ -161,7 +112,10 @@ export const Window = ({
         </div>
       </div>
       <div className="flex flex-col justify-between pb-14">
-        <button className="border-b-2 border-l-2 border-black px-3 py-2 cursor-pointer">
+        <button
+          className="border-b-2 border-l-2 border-black px-3 py-2 cursor-pointer"
+          onClick={close}
+        >
           <span className="font-helvetica font-bold uppercase inline-block scale-y-200 text-sm">
             fechar
           </span>
