@@ -20,6 +20,7 @@ import { docsEdges, docsNodes, imgsEdges, imgsNodes } from "../data/docs";
 import Vitral from "../assets/images/vitral.svg";
 import { LittleBible } from "../components/windows/bible-window";
 import { articles } from "../data/articles";
+import { ImageWindow } from "../components/windows/image-window";
 
 export const Main = () => {
   const [nodes, setNodes] = useState<Node[]>(shortcuts);
@@ -108,6 +109,12 @@ export const Main = () => {
       {isOpen("biblinha") && <LittleBible name="biblinha" icon="bookopened" />}
       {isOpen("esperança.txt") && (
         <TextWindow name="esperança.txt" textItem={articles["esperança.txt"]} />
+      )}
+      {isOpen("producao_caseira_da_casa.gif") && (
+        <ImageWindow
+          name="producao_caseira_da_casa.gif"
+          imageName="producao_caseira_da_casa"
+        />
       )}
     </section>
   );
