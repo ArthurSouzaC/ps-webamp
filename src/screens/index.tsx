@@ -17,8 +17,9 @@ import { TextWindow } from "../components/windows/text-window";
 import { textItens } from "../constants";
 import { useWindowManager } from "../hooks/useWindowManager";
 import { shortcuts, shortcutsEdges } from "../data/shortcuts";
-import { docsEdges, docsNodes } from "../data/docs";
+import { docsEdges, docsNodes, imgsEdges, imgsNodes } from "../data/docs";
 import Vitral from "../assets/images/vitral.svg";
+import { LittleBible } from "../components/windows/bible-window";
 
 export const Main = () => {
   const [nodes, setNodes] = useState<Node[]>(shortcuts);
@@ -95,7 +96,16 @@ export const Main = () => {
           initialEdges={docsEdges}
         />
       )}
+      {isOpen("imgs") && (
+        <NodesWindow
+          name="imgs"
+          icon="camera"
+          initialNodes={imgsNodes}
+          initialEdges={imgsEdges}
+        />
+      )}
       {isOpen("refs") && <DirectoryWindow name="refs" icon="bookmark" />}
+      {isOpen("biblinha") && <LittleBible name="biblinha" icon="bookopened" />}
       {isOpen("esperanca.txt") && (
         <TextWindow name="esperança.txt" textItem={textItens[0]} />
       )}
