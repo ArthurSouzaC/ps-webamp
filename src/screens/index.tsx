@@ -14,6 +14,7 @@ import { Shortcut } from "../components/ui/shortcut";
 import { Window } from "../components/windows/nodes-window";
 import { Directory } from "../components/windows/directory-window";
 import { Text } from "../components/windows/text-window";
+import { Image } from "../components/windows/image-window";
 import { textItens } from "../constants";
 
 export const Main = () => {
@@ -174,6 +175,9 @@ export const Main = () => {
       <Window name="docs" icon="file" />
       <Directory name="refs" icon="bookmark" />
       <Text name="esperança.txt" textItem={textItens[0]}/>
+      <Image name="vitral_literal.gif" imageName="vitral_literal"/>
+      <Image name="producao_caseira_da_casa.gif" imageName="producao_caseira_da_casa"/>
+      <Image name="ULY6.gif" imageName="ULY6"/>
     </section>
   );
 };

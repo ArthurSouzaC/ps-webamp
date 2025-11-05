@@ -1,7 +1,5 @@
 import { useRef } from "react";
 import { useDraggable } from "@reactuses/core";
-import { DirectoryChildren } from "../ui/directory-children";
-import { directoryItens } from "../../constants";
 
 interface TextProps {
   initialPosition?: {
@@ -29,7 +27,6 @@ export const Text = ({
     initialValue: initialPosition,
     preventDefault: true,
     containerElement: scope,
-    exact: true,
   });
 
   return (
