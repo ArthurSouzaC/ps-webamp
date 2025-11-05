@@ -8,20 +8,12 @@ import FileIcon from "../../assets/icons/file.svg";
 import NoteIcon from "../../assets/icons/note.svg";
 import { DirectoryChildren } from "../ui/directory-children";
 import { directoryItens } from "../../constants";
+import { useWindowManager } from "../../hooks/useWindowManager";
 
 interface DirectoryProps {
-  initialPosition?: {
-    x: number;
-    y: number;
-  };
   name: string;
   icon: string;
 }
-
-const defaultInitialPosition = {
-  x: window.innerWidth / 2,
-  y: window.innerHeight / 2,
-};
 
 const iconMap: { [key: string]: string } = {
   book: BookIcon,
@@ -32,20 +24,22 @@ const iconMap: { [key: string]: string } = {
   note: NoteIcon,
 };
 
-export const Directory = ({
-  initialPosition = defaultInitialPosition,
-  name,
-  icon,
-}: DirectoryProps) => {
+export const DirectoryWindow = ({ name, icon }: DirectoryProps) => {
   const el = useRef<HTMLDivElement>(null);
   const scope = useRef<HTMLDivElement>(null);
 
+  const { windows, closeWindow } = useWindowManager();
+
   const [x, y] = useDraggable(el, {
-    initialValue: initialPosition,
+    initialValue: windows[name].position,
     preventDefault: true,
     containerElement: scope,
     exact: true,
   });
+
+  const close = () => {
+    closeWindow(name);
+  };
 
   return (
     <div
@@ -54,7 +48,7 @@ export const Directory = ({
         position: "absolute",
         left: x,
         top: y,
-        zIndex: 10,
+        zIndex: windows[name].zIndex,
       }}
       className="border-2 border-black flex flex-row bg-main cursor-pointer min-h-[600px]"
     >
@@ -65,7 +59,10 @@ export const Directory = ({
         </div>
       </div>
       <div className="flex flex-col justify-between pb-14">
-        <button className="border-b-2 border-l-2 border-black px-3 py-2 cursor-pointer">
+        <button
+          className="border-b-2 border-l-2 border-black px-3 py-2 cursor-pointer"
+          onClick={close}
+        >
           <span className="font-helvetica font-bold uppercase inline-block scale-y-200 text-sm">
             fechar
           </span>

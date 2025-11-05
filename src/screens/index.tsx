@@ -11,119 +11,18 @@ import {
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 import { Shortcut } from "../components/ui/shortcut";
-import { Window } from "../components/windows/nodes-window";
-import { Directory } from "../components/windows/directory-window";
+import { NodesWindow } from "../components/windows/nodes-window";
+import { DirectoryWindow } from "../components/windows/directory-window";
+import { TextWindow } from "../components/windows/text-window";
+import { textItens } from "../constants";
+import { useWindowManager } from "../hooks/useWindowManager";
+import { shortcuts, shortcutsEdges } from "../data/shortcuts";
+import { docsEdges, docsNodes } from "../data/docs";
+import Vitral from "../assets/images/vitral.svg";
 
 export const Main = () => {
-  const [openedWindows, setOpenedWindows] = useState<string[]>([]);
-
-  const onClickShortcut = (id: string) => {
-    const isAlreadyOpened = openedWindows.includes(id);
-
-    if (!isAlreadyOpened) {
-      setOpenedWindows([...openedWindows, id]);
-    }
-  };
-
-  const onCloseWindow = (id: string) => {
-    setOpenedWindows(openedWindows.filter((windowId) => windowId !== id));
-  };
-
-  const initialNodes: Node[] = [
-    {
-      id: "play",
-      type: "shortcut",
-      position: { x: 0, y: 0 },
-      data: {
-        name: "play",
-        icon: "note",
-        onClick: onClickShortcut,
-      },
-    },
-    {
-      id: "docs",
-      type: "shortcut",
-      position: { x: 100, y: 150 },
-      data: {
-        name: "docs",
-        icon: "file",
-        onClick: onClickShortcut,
-      },
-    },
-    {
-      id: "imgs",
-      type: "shortcut",
-      position: { x: 0, y: 300 },
-      data: {
-        name: "imgs",
-        icon: "camera",
-        onClick: onClickShortcut,
-      },
-    },
-    {
-      id: "refs",
-      type: "shortcut",
-      position: { x: 100, y: 450 },
-      data: {
-        name: "refs",
-        icon: "bookmark",
-        onClick: onClickShortcut,
-      },
-    },
-    {
-      id: "biblinha",
-      type: "shortcut",
-      position: { x: 0, y: 600 },
-      data: {
-        name: "biblinha",
-        icon: "bookopened",
-        onClick: onClickShortcut,
-      },
-    },
-  ];
-
-  const [nodes, setNodes] = useState<Node[]>(initialNodes);
-
-  const initialEdges: Edge[] = [
-    {
-      id: "play-docs",
-      type: "straight-edge",
-      source: "play",
-      target: "docs",
-      style: {
-        stroke: "#000",
-      },
-    },
-    {
-      id: "docs-imgs",
-      type: "straight-edge",
-      source: "docs",
-      target: "imgs",
-      style: {
-        stroke: "#000",
-      },
-    },
-    {
-      id: "imgs-refs",
-      type: "straight-edge",
-      source: "imgs",
-      target: "refs",
-      style: {
-        stroke: "#000",
-      },
-    },
-    {
-      id: "refs-biblinha",
-      type: "straight-edge",
-      source: "refs",
-      target: "biblinha",
-      style: {
-        stroke: "#000",
-      },
-    },
-  ];
-
-  const [edges, setEdges] = useState<Edge[]>(initialEdges);
+  const [nodes, setNodes] = useState<Node[]>(shortcuts);
+  const [edges, setEdges] = useState<Edge[]>(shortcutsEdges);
 
   const onNodesChange = useCallback(
     (changes: NodeChange[]) =>
@@ -145,37 +44,61 @@ export const Main = () => {
     "straight-edge": StraightEdge,
   };
 
+  const { isOpen } = useWindowManager();
+
   return (
-    <section className="w-full h-full bg-main">
-      <ReactFlow
-        nodeTypes={nodeTypes}
-        edgeTypes={edgeTypes}
-        nodes={nodes}
-        edges={edges}
-        onNodesChange={onNodesChange}
-        onEdgesChange={onEdgesChange}
-        fitView
-        maxZoom={1}
-        minZoom={1}
-        panOnDrag={false}
-        draggable={false}
-        elementsSelectable={false}
-        viewport={{
-          x: 200,
-          y: 100,
-          zoom: 1,
-        }}
-        proOptions={{
-          hideAttribution: true,
-        }}
-      />
-      {/* <Window name="docs" icon="file" /> */}
-      <Directory name="refs" icon="bookmark" />
-      {/* <Text name="esperança.txt" textItem={textItens[0]}/>
-      <Image name="vitral_literal.gif" imageName="vitral_literal"/>
-      <Image name="producao_caseira_da_casa.gif" imageName="producao_caseira_da_casa"/>
-      <Image name="ULY6.gif" imageName="ULY6"/> */}
-      <Window name="biblinha" icon="bookopened" />
+    <section className="w-full h-full flex flex-col items-center justify-center bg-main">
+      <div className="w-3/4 h-3/4 border-2 border-black">
+        <ReactFlow
+          nodeTypes={nodeTypes}
+          edgeTypes={edgeTypes}
+          nodes={nodes}
+          edges={edges}
+          onNodesChange={onNodesChange}
+          onEdgesChange={onEdgesChange}
+          fitView
+          maxZoom={1}
+          minZoom={1}
+          panOnDrag={false}
+          draggable={false}
+          elementsSelectable={false}
+          nodeExtent={[
+            [0, 0],
+            [window.innerWidth * 0.75, window.innerHeight * 0.75],
+          ]}
+          viewport={{
+            x: 0,
+            y: 0,
+            zoom: 1,
+          }}
+          proOptions={{
+            hideAttribution: true,
+          }}
+        />
+      </div>
+      <div className="w-3/4">
+        <img
+          src={Vitral}
+          alt={Vitral}
+          style={{
+            marginRight: "auto",
+            marginTop: -2,
+          }}
+        />
+      </div>
+
+      {isOpen("docs") && (
+        <NodesWindow
+          name="docs"
+          icon="file"
+          initialNodes={docsNodes}
+          initialEdges={docsEdges}
+        />
+      )}
+      {isOpen("refs") && <DirectoryWindow name="refs" icon="bookmark" />}
+      {isOpen("esperanca.txt") && (
+        <TextWindow name="esperança.txt" textItem={textItens[0]} />
+      )}
     </section>
   );
 };
