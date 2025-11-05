@@ -13,9 +13,6 @@ import "@xyflow/react/dist/style.css";
 import { Shortcut } from "../components/ui/shortcut";
 import { Window } from "../components/windows/nodes-window";
 import { Directory } from "../components/windows/directory-window";
-import { Text } from "../components/windows/text-window";
-import { Image } from "../components/windows/image-window";
-import { textItens } from "../constants";
 
 export const Main = () => {
   const [openedWindows, setOpenedWindows] = useState<string[]>([]);
@@ -172,12 +169,13 @@ export const Main = () => {
           hideAttribution: true,
         }}
       />
-      <Window name="docs" icon="file" />
+      {/* <Window name="docs" icon="file" /> */}
       <Directory name="refs" icon="bookmark" />
-      <Text name="esperança.txt" textItem={textItens[0]}/>
+      {/* <Text name="esperança.txt" textItem={textItens[0]}/>
       <Image name="vitral_literal.gif" imageName="vitral_literal"/>
       <Image name="producao_caseira_da_casa.gif" imageName="producao_caseira_da_casa"/>
-      <Image name="ULY6.gif" imageName="ULY6"/>
+      <Image name="ULY6.gif" imageName="ULY6"/> */}
+      <Window name="biblinha" icon="bookopened" />
     </section>
   );
 };
