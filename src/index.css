@@ -10,7 +10,15 @@
 
 @font-face {
   font-family: "HelveticaNeue";
-  src: url("assets/fonts/HelveticaNeueRoman.otf") format("opentype");
+  src: url("assets/fonts/helvetica-neue/HelveticaNeueRoman.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "TimesNewRoman";
+  src: url("assets/fonts/times-new-roman/times.ttf") format("opentype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -23,4 +31,5 @@
 @theme {
   --color-main: #364738;
   --font-helvetica: "HelveticaNeue", sans-serif;
+  --font-times: "TimesNewRoman", sans-serif;
 }
