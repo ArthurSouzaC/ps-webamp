@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useDraggable } from "@reactuses/core";
 import { useWindowManager } from "../../hooks/useWindowManager";
 import { iconMap } from "../../data/icons";
