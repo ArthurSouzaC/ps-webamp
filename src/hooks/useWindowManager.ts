@@ -31,8 +31,8 @@ export const useWindowManager = create<WindowManagerState>((set, get) => ({
           ...windows[id],
           id,
           position: position || {
-            x: (currentTop + 1) * 100 + 500,
-            y: (currentTop + 1) * 50,
+            x: (Object.keys(windows).length + 1) * 100 + 500,
+            y: (Object.keys(windows).length + 1) * 75,
           },
           isOpen: true,
           zIndex: currentTop + 1,
@@ -44,15 +44,10 @@ export const useWindowManager = create<WindowManagerState>((set, get) => ({
   closeWindow: (id) => {
     const { windows } = get();
     if (!windows[id]) return;
+    const updatedWindows = { ...windows };
+    delete updatedWindows[id];
     set({
-      windows: {
-        ...windows,
-        [id]: {
-          ...windows[id],
-          isOpen: false,
-          zIndex: 0,
-        },
-      },
+      windows: updatedWindows,
     });
   },
 

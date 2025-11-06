@@ -5,7 +5,7 @@ import uly6 from "../../assets/imgs/ULY6.png";
 import vitral from "../../assets/imgs/vitral_literal.png";
 import { useWindowManager } from "../../hooks/useWindowManager";
 
-interface ImageProps {
+interface Props {
   name: string;
   imageName: string;
 }
@@ -16,20 +16,22 @@ const imageMap: { [key: string]: string } = {
   vitral_literal: vitral,
 };
 
-export const ImageWindow = ({ name, imageName }: ImageProps) => {
+export const ImageWindow = ({ name, imageName }: Props) => {
   const el = useRef<HTMLDivElement>(null);
-  const scope = useRef<HTMLDivElement>(null);
 
-  const { windows, closeWindow } = useWindowManager();
+  const { windows, closeWindow, bringToFront } = useWindowManager();
 
   const [x, y] = useDraggable(el, {
     initialValue: windows[name].position,
     preventDefault: true,
-    containerElement: scope,
   });
 
   const close = () => {
     closeWindow(name);
+  };
+
+  const onWindowFocus = () => {
+    bringToFront(name);
   };
 
   return (
@@ -39,27 +41,28 @@ export const ImageWindow = ({ name, imageName }: ImageProps) => {
         position: "absolute",
         left: x,
         top: y,
-        zIndex: 10,
+        zIndex: windows[name].zIndex,
       }}
       className="border-2 border-[#A5A690] bg-black cursor-pointer text-[#A5A690]"
     >
       <div
         ref={el}
-        className="flex border-y-2 border-[#A5A690]  border-t-0 justify-between "
+        className="flex border-y-2 border-[#A5A690]  border-t-0 justify-between"
+        onClick={onWindowFocus}
       >
-        <span className="font-helvetica font-bold uppercase py-2.5 px-4 text-sm ">
+        <span className="font-helvetica font-bold uppercase py-2.5 px-4 text-sm select-none">
           {name}
         </span>
         <button
           className="border-x-2 border-r-0 border-[#A5A690] px-3 py-2 cursor-pointer"
           onClick={close}
         >
-          <span className="font-helvetica font-bold uppercase inline-block scale-y-200 text-sm">
+          <span className="font-helvetica font-bold uppercase inline-block scale-y-200 text-sm select-none">
             fechar
           </span>
         </button>
       </div>
-      <div className="py-3 px-4 cursor-default w-[380px]">
+      <div className="py-3 px-4 cursor-default w-[500px]">
         <img src={imageMap[imageName]} alt={imageName} />
       </div>
     </div>

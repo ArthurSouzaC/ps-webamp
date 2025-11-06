@@ -39,25 +39,25 @@ export const imgsNodes: Node[] = [
   {
     id: "caseira",
     type: "text-node",
-    position: { x: 0, y: 0 },
+    position: { x: 0, y: 50 },
     data: {
-      name: "producao_caseira_da_casa.gif",
+      name: "producao_caseira_da_casa.png",
     },
   },
   {
     id: "uli6",
     type: "text-node",
-    position: { x: 70, y: 80 },
+    position: { x: 100, y: 130 },
     data: {
-      name: "uly6.gif",
+      name: "uly6.png",
     },
   },
   {
     id: "vitral",
     type: "text-node",
-    position: { x: 100, y: 130 },
+    position: { x: 200, y: 210 },
     data: {
-      name: "vitral_literal.gif",
+      name: "vitral_literal.png",
     },
   },
 ];

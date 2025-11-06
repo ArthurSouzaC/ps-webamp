@@ -15,7 +15,7 @@ import { TextNode } from "../ui/text-node";
 import { useWindowManager } from "../../hooks/useWindowManager";
 import { iconMap } from "../../data/icons";
 
-interface WindowProps {
+interface Props {
   initialPosition?: {
     x: number;
     y: number;
@@ -39,16 +39,14 @@ export const NodesWindow = ({
   icon,
   initialNodes,
   initialEdges,
-}: WindowProps) => {
+}: Props) => {
   const el = useRef<HTMLDivElement>(null);
-  const scope = useRef<HTMLDivElement>(null);
 
-  const { windows, closeWindow } = useWindowManager();
+  const { windows, closeWindow, bringToFront } = useWindowManager();
 
   const [x, y] = useDraggable(el, {
     initialValue: windows[name].position,
     preventDefault: true,
-    containerElement: scope,
     exact: true,
   });
 
@@ -71,6 +69,10 @@ export const NodesWindow = ({
     closeWindow(name);
   };
 
+  const onWindowFocus = () => {
+    bringToFront(name);
+  };
+
   return (
     <div
       ref={el}
@@ -81,9 +83,10 @@ export const NodesWindow = ({
         zIndex: windows[name].zIndex,
       }}
       className="border-2 border-black flex flex-row bg-main cursor-pointer"
+      onClick={onWindowFocus}
     >
       <div className="border-t-2 border-l-2 border-b-2 border-black ml-8 my-[42px] cursor-default">
-        <div className="border-r-2 border-black w-[380px] h-[280px]">
+        <div className="border-r-2 border-black w-[500px] h-[300px]">
           <ReactFlow
             nodeTypes={nodeTypes}
             edgeTypes={edgeTypes}
@@ -98,7 +101,7 @@ export const NodesWindow = ({
             elementsSelectable={false}
             nodeExtent={[
               [10, 0],
-              [370, 280],
+              [500, 300],
             ]}
             viewport={{
               x: 0,
@@ -116,14 +119,18 @@ export const NodesWindow = ({
           className="border-b-2 border-l-2 border-black px-3 py-2 cursor-pointer"
           onClick={close}
         >
-          <span className="font-helvetica font-bold uppercase inline-block scale-y-200 text-sm">
+          <span className="font-helvetica font-bold uppercase inline-block scale-y-200 text-sm select-none">
             fechar
           </span>
         </button>
 
-        <img className="mx-auto mt-auto mb-8" src={iconMap[icon]} alt={icon} />
+        <img
+          className="mx-auto mt-auto mb-8 select-none"
+          src={iconMap["dark"][icon]}
+          alt={icon}
+        />
 
-        <span className="font-helvetica font-bold uppercase inline-block scale-y-250 scale-x-75 text-3xl rotate-270">
+        <span className="font-helvetica font-bold uppercase inline-block scale-y-250 scale-x-75 text-3xl rotate-270 select-none">
           {name}
         </span>
       </div>

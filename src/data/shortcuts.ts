@@ -2,11 +2,11 @@ import { type Node, type Edge } from "@xyflow/react";
 
 export const shortcuts: Node[] = [
   {
-    id: "play",
+    id: "player",
     type: "shortcut",
     position: { x: 100, y: 25 },
     data: {
-      name: "play",
+      name: "player",
       icon: "note",
     },
   },
@@ -50,9 +50,9 @@ export const shortcuts: Node[] = [
 
 export const shortcutsEdges: Edge[] = [
   {
-    id: "play-docs",
+    id: "player-docs",
     type: "straight-edge",
-    source: "play",
+    source: "player",
     target: "docs",
     style: {
       stroke: "#000",

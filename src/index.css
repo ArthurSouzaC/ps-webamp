@@ -19,7 +19,16 @@
 
 @font-face {
   font-family: "TimesNewRoman";
-  src: url("assets/fonts/times-new-roman/times.ttf") format("opentype");
+  src: url("assets/fonts/times-new-roman/times.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "BasisGrotesque";
+  src: url("assets/fonts/basis-grotesque/BasisGrotesqueMonoPro-Regular.ttf")
+    format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -38,4 +47,9 @@ body {
   --color-main: #364738;
   --font-helvetica: "HelveticaNeue", sans-serif;
   --font-times: "TimesNewRoman", sans-serif;
+  --font-grotesque: "BasisGrotesque", sans-serif;
+}
+
+.track-cell > span {
+  font-size: 12px;
 }

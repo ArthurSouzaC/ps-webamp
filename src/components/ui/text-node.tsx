@@ -1,5 +1,6 @@
 import { Handle, Position } from "@xyflow/react";
 import { useWindowManager } from "../../hooks/useWindowManager";
+import type { MouseEventHandler } from "react";
 
 interface TextNodeProps {
   data: {
@@ -12,7 +13,9 @@ export const TextNode = ({ data }: TextNodeProps) => {
 
   const { isOpen, bringToFront, openWindow } = useWindowManager();
 
-  const onClick = () => {
+  const onClick: MouseEventHandler = (event) => {
+    event.stopPropagation();
+
     if (isOpen(name)) {
       bringToFront(name);
     } else {

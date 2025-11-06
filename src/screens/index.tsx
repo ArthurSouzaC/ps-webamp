@@ -17,10 +17,11 @@ import { TextWindow } from "../components/windows/text-window";
 import { useWindowManager } from "../hooks/useWindowManager";
 import { shortcuts, shortcutsEdges } from "../data/shortcuts";
 import { docsEdges, docsNodes, imgsEdges, imgsNodes } from "../data/docs";
-import Vitral from "../assets/images/vitral.svg";
-import { LittleBible } from "../components/windows/bible-window";
+import Vitral from "../assets/imgs/vitral.svg";
+import { BibleWindow } from "../components/windows/bible-window";
 import { articles } from "../data/articles";
 import { ImageWindow } from "../components/windows/image-window";
+import { PlayerWindow } from "../components/windows/player-window";
 
 export const Main = () => {
   const [nodes, setNodes] = useState<Node[]>(shortcuts);
@@ -89,6 +90,7 @@ export const Main = () => {
         />
       </div>
 
+      {isOpen("player") && <PlayerWindow name="player" />}
       {isOpen("docs") && (
         <NodesWindow
           name="docs"
@@ -106,15 +108,28 @@ export const Main = () => {
         />
       )}
       {isOpen("refs") && <DirectoryWindow name="refs" icon="bookmark" />}
-      {isOpen("biblinha") && <LittleBible name="biblinha" icon="bookopened" />}
+      {isOpen("biblinha") && <BibleWindow name="biblinha" icon="bookopened" />}
       {isOpen("esperança.txt") && (
         <TextWindow name="esperança.txt" textItem={articles["esperança.txt"]} />
       )}
-      {isOpen("producao_caseira_da_casa.gif") && (
+      {isOpen("poema.txt") && (
+        <TextWindow name="poema.txt" textItem={articles["poema.txt"]} />
+      )}
+      {isOpen("carta_#01.txt") && (
+        <TextWindow name="carta_#01.txt" textItem={articles["carta_#01.txt"]} />
+      )}
+      {isOpen("carta_#02.txt") && (
+        <TextWindow name="carta_#02.txt" textItem={articles["carta_#02.txt"]} />
+      )}
+      {isOpen("producao_caseira_da_casa.png") && (
         <ImageWindow
-          name="producao_caseira_da_casa.gif"
+          name="producao_caseira_da_casa.png"
           imageName="producao_caseira_da_casa"
         />
+      )}
+      {isOpen("uly6.png") && <ImageWindow name="uly6.png" imageName="ULY6" />}
+      {isOpen("vitral_literal.png") && (
+        <ImageWindow name="vitral_literal.png" imageName="vitral_literal" />
       )}
     </section>
   );
