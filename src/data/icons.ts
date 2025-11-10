@@ -4,12 +4,14 @@ import BookopenedLightIcon from "../assets/icons/light/bookopened.svg";
 import CameraLightIcon from "../assets/icons/light/camera-photo.svg";
 import FileLightIcon from "../assets/icons/light/file.svg";
 import NoteLightIcon from "../assets/icons/light/note.svg";
+import NoteWhiteIcon from "../assets/icons/light/note-white.svg";
 import BookIcon from "../assets/icons/dark/book.svg";
 import BookmarkIcon from "../assets/icons/dark/bookmark.svg";
 import BookopenedIcon from "../assets/icons/dark/bookopened.svg";
 import CameraIcon from "../assets/icons/dark/camera-photo.svg";
 import FileIcon from "../assets/icons/dark/file.svg";
 import NoteIcon from "../assets/icons/dark/note.svg";
+
 
 export const iconMap: { [key: string]: { [key: string]: string } } = {
   light: {
@@ -19,6 +21,7 @@ export const iconMap: { [key: string]: { [key: string]: string } } = {
     camera: CameraLightIcon,
     file: FileLightIcon,
     note: NoteLightIcon,
+    'note-white': NoteWhiteIcon,
   },
   dark: {
     book: BookIcon,

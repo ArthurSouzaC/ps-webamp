@@ -17,11 +17,13 @@ import { TextWindow } from "../components/windows/text-window";
 import { useWindowManager } from "../hooks/useWindowManager";
 import { shortcuts, shortcutsEdges } from "../data/shortcuts";
 import { docsEdges, docsNodes, imgsEdges, imgsNodes } from "../data/docs";
-import Vitral from "../assets/imgs/vitral.svg";
+import VitralLogo from "../assets/imgs/vitral.svg";
+import Vitral from "../assets/imgs/vitral_literal.png";
 import { BibleWindow } from "../components/windows/bible-window";
 import { articles } from "../data/articles";
 import { ImageWindow } from "../components/windows/image-window";
 import { PlayerWindow } from "../components/windows/player-window";
+import { iconMap } from "../data/icons";
 
 export const Main = () => {
   const [nodes, setNodes] = useState<Node[]>(shortcuts);
@@ -49,88 +51,139 @@ export const Main = () => {
 
   const { isOpen } = useWindowManager();
 
+  if (window.innerWidth >= 768)
+    return (
+      <section className="w-full h-full flex flex-col items-center justify-center bg-main">
+        <div className="w-3/4 h-3/4 border-2 border-black">
+          <ReactFlow
+            nodeTypes={nodeTypes}
+            edgeTypes={edgeTypes}
+            nodes={nodes}
+            edges={edges}
+            onNodesChange={onNodesChange}
+            onEdgesChange={onEdgesChange}
+            fitView
+            maxZoom={1}
+            minZoom={1}
+            panOnDrag={false}
+            draggable={false}
+            elementsSelectable={false}
+            nodeExtent={[
+              [0, 0],
+              [window.innerWidth * 0.75, window.innerHeight * 0.75],
+            ]}
+            viewport={{
+              x: 0,
+              y: 0,
+              zoom: 1,
+            }}
+            proOptions={{
+              hideAttribution: true,
+            }}
+          />
+        </div>
+        <div className="w-3/4">
+          <img
+            src={VitralLogo}
+            alt={VitralLogo}
+            style={{
+              marginRight: "auto",
+              marginTop: -2,
+            }}
+          />
+        </div>
+
+        {isOpen("player") && <PlayerWindow name="player" />}
+        {isOpen("docs") && (
+          <NodesWindow
+            name="docs"
+            icon="file"
+            initialNodes={docsNodes}
+            initialEdges={docsEdges}
+          />
+        )}
+        {isOpen("imgs") && (
+          <NodesWindow
+            name="imgs"
+            icon="camera"
+            initialNodes={imgsNodes}
+            initialEdges={imgsEdges}
+          />
+        )}
+        {isOpen("refs") && <DirectoryWindow name="refs" icon="bookmark" />}
+        {isOpen("biblinha") && (
+          <BibleWindow name="biblinha" icon="bookopened" />
+        )}
+        {isOpen("esperança.txt") && (
+          <TextWindow
+            name="esperança.txt"
+            textItem={articles["esperança.txt"]}
+          />
+        )}
+        {isOpen("poema.txt") && (
+          <TextWindow name="poema.txt" textItem={articles["poema.txt"]} />
+        )}
+        {isOpen("carta_#01.txt") && (
+          <TextWindow
+            name="carta_#01.txt"
+            textItem={articles["carta_#01.txt"]}
+          />
+        )}
+        {isOpen("carta_#02.txt") && (
+          <TextWindow
+            name="carta_#02.txt"
+            textItem={articles["carta_#02.txt"]}
+          />
+        )}
+        {isOpen("producao_caseira_da_casa.png") && (
+          <ImageWindow
+            name="producao_caseira_da_casa.png"
+            imageName="producao_caseira_da_casa"
+          />
+        )}
+        {isOpen("uly6.png") && <ImageWindow name="uly6.png" imageName="ULY6" />}
+        {isOpen("vitral_literal.png") && (
+          <ImageWindow name="vitral_literal.png" imageName="vitral_literal" />
+        )}
+      </section>
+    );
   return (
     <section className="w-full h-full flex flex-col items-center justify-center bg-main">
-      <div className="w-3/4 h-3/4 border-2 border-black">
-        <ReactFlow
-          nodeTypes={nodeTypes}
-          edgeTypes={edgeTypes}
-          nodes={nodes}
-          edges={edges}
-          onNodesChange={onNodesChange}
-          onEdgesChange={onEdgesChange}
-          fitView
-          maxZoom={1}
-          minZoom={1}
-          panOnDrag={false}
-          draggable={false}
-          elementsSelectable={false}
-          nodeExtent={[
-            [0, 0],
-            [window.innerWidth * 0.75, window.innerHeight * 0.75],
-          ]}
-          viewport={{
-            x: 0,
-            y: 0,
-            zoom: 1,
-          }}
-          proOptions={{
-            hideAttribution: true,
-          }}
-        />
+      <div className="relative w-4/5 h-4/5 border-2 border-black flex flex-col justify-evenly items-center">
+        <img src={Vitral} alt={Vitral} className="object-cover h-full p-2 absolute top-0 left-0 opacity-50" />
+        <a className="text-center border-2 border-black cursor-pointer text-black min-w-2/3 z-10 backdrop-blur-xs"  href="https://open.spotify.com/intl-pt/artist/1zJFoyxyn49Di48yHUH6dU?si=-1-RJjTOQmmYZzJyr9J1Pg" target="_blank" rel="noopener noreferrer" >
+          <img
+            className="ml-auto z-10"
+            src={iconMap["dark"]["note"]}
+            alt="note"
+          />
+
+          <span className="font-helvetica font-bold uppercase inline-block scale-y-200 text-3xl m-4 mt-2">
+            Spotify
+          </span>
+        </a>
+        <a className="text-center border-2 border-black cursor-pointer text-black min-w-2/3 z-10 backdrop-blur-xs"  href="https://www.youtube.com/@saulopoares" target="_blank" rel="noopener noreferrer">
+          <img
+            className="ml-auto z-10"
+            src={iconMap["dark"]["note"]}
+            alt="note"
+          />
+
+          <span className="font-helvetica font-bold uppercase inline-block scale-y-200 text-3xl m-4 mt-2">
+            Youtube
+          </span>
+        </a>
       </div>
-      <div className="w-3/4">
+      <div className="w-4/5">
         <img
-          src={Vitral}
-          alt={Vitral}
+          src={VitralLogo}
+          alt={VitralLogo}
           style={{
             marginRight: "auto",
             marginTop: -2,
           }}
         />
       </div>
-
-      {isOpen("player") && <PlayerWindow name="player" />}
-      {isOpen("docs") && (
-        <NodesWindow
-          name="docs"
-          icon="file"
-          initialNodes={docsNodes}
-          initialEdges={docsEdges}
-        />
-      )}
-      {isOpen("imgs") && (
-        <NodesWindow
-          name="imgs"
-          icon="camera"
-          initialNodes={imgsNodes}
-          initialEdges={imgsEdges}
-        />
-      )}
-      {isOpen("refs") && <DirectoryWindow name="refs" icon="bookmark" />}
-      {isOpen("biblinha") && <BibleWindow name="biblinha" icon="bookopened" />}
-      {isOpen("esperança.txt") && (
-        <TextWindow name="esperança.txt" textItem={articles["esperança.txt"]} />
-      )}
-      {isOpen("poema.txt") && (
-        <TextWindow name="poema.txt" textItem={articles["poema.txt"]} />
-      )}
-      {isOpen("carta_#01.txt") && (
-        <TextWindow name="carta_#01.txt" textItem={articles["carta_#01.txt"]} />
-      )}
-      {isOpen("carta_#02.txt") && (
-        <TextWindow name="carta_#02.txt" textItem={articles["carta_#02.txt"]} />
-      )}
-      {isOpen("producao_caseira_da_casa.png") && (
-        <ImageWindow
-          name="producao_caseira_da_casa.png"
-          imageName="producao_caseira_da_casa"
-        />
-      )}
-      {isOpen("uly6.png") && <ImageWindow name="uly6.png" imageName="ULY6" />}
-      {isOpen("vitral_literal.png") && (
-        <ImageWindow name="vitral_literal.png" imageName="vitral_literal" />
-      )}
     </section>
   );
 };
