@@ -47,7 +47,7 @@ export const BibleWindow = ({ name, icon }: Props) => {
         verse: (prev.verse + 1) % bibleVerses.length,
       }));
 
-      animate(".card", { top: -200 });
+      animate(".card", { top: -200,  visibility: "visible"  });
     });
   };
 
@@ -91,6 +91,7 @@ export const BibleWindow = ({ name, icon }: Props) => {
                 height: 150,
                 padding: 16,
                 zIndex: -1,
+                visibility: "hidden",
               }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
               className="card rotate-2"
