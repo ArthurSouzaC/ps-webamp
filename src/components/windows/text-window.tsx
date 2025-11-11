@@ -34,7 +34,7 @@ export const TextWindow = ({ name, textItem }: Props) => {
         top: y,
         zIndex: windows[name].zIndex,
       }}
-      className="border-2 border-black bg-main cursor-pointer"
+      className="border-2 border-black bg-main cursor-pointer overflow-hidden"
       onClick={onWindowFocus}
     >
       <div className="flex border-y-2 border-t-0 justify-between">
@@ -50,7 +50,11 @@ export const TextWindow = ({ name, textItem }: Props) => {
           </span>
         </button>
       </div>
-      <div className="m-5 cursor-default bg-[#A5A690] w-[750px] pt-6 pb-10 px-3 gap-5 flex flex-col">
+      <div className="m-5 cursor-default bg-[#A5A690] w-[750px] pt-6 pb-10 px-3 gap-5 flex flex-col overflow-y-scroll max-h-96 [&::-webkit-scrollbar]:w-2
+      [&::-webkit-scrollbar-track]:bg-gray-100
+      [&::-webkit-scrollbar-thumb]:bg-gray-300
+      dark:[&::-webkit-scrollbar-track]:bg-[#435946]
+      dark:[&::-webkit-scrollbar-thumb]:bg-[#283629]">
         <span
           dangerouslySetInnerHTML={{ __html: textItem }}
           className="font-times"

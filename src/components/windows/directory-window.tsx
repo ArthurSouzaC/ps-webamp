@@ -38,7 +38,7 @@ export const DirectoryWindow = ({ name, icon }: Props) => {
         top: y,
         zIndex: windows[name].zIndex,
       }}
-      className="border-2 border-black flex flex-row bg-main cursor-pointer min-h-[600px]"
+      className="border-2 border-black flex flex-row bg-main cursor-pointer min-h-[600px] select-none"
       onClick={onWindowFocus}
     >
       <div className="border-t-2 border-l-2 border-b-2 border-r-2 border-black ml-8 my-[42px] cursor-default">
@@ -47,7 +47,7 @@ export const DirectoryWindow = ({ name, icon }: Props) => {
           <DirectoryChildren data={directories["music"]} />
         </div>
       </div>
-      <div className="flex flex-col justify-between pb-14">
+      <div className="flex flex-col justify-between pb-14 cursor-default">
         <button
           className="border-b-2 border-l-2 border-black px-3 py-2 cursor-pointer"
           onClick={close}

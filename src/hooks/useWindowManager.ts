@@ -81,7 +81,7 @@ export const useWindowManager = create<WindowManagerState>((set, get) => ({
     const { windows } = get();
     return Object.values(windows).reduce(
       (max, w) => Math.max(max, w.zIndex ?? 0),
-      0
+      3
     );
   },
 

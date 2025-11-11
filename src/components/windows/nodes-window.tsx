@@ -114,7 +114,7 @@ export const NodesWindow = ({
           />
         </div>
       </div>
-      <div className="flex flex-col justify-between pb-14">
+      <div className="flex flex-col justify-between pb-14 cursor-default">
         <button
           className="border-b-2 border-l-2 border-black px-3 py-2 cursor-pointer"
           onClick={close}

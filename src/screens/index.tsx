@@ -19,6 +19,7 @@ import { shortcuts, shortcutsEdges } from "../data/shortcuts";
 import { docsEdges, docsNodes, imgsEdges, imgsNodes } from "../data/docs";
 import VitralLogo from "../assets/imgs/vitral.svg";
 import Vitral from "../assets/imgs/vitral_literal.png";
+import gifSite from "../assets/imgs/gif-site.gif";
 import { BibleWindow } from "../components/windows/bible-window";
 import { articles } from "../data/articles";
 import { ImageWindow } from "../components/windows/image-window";
@@ -54,7 +55,7 @@ export const Main = () => {
   if (window.innerWidth >= 768)
     return (
       <section className="w-full h-full flex flex-col items-center justify-center bg-main">
-        <div className="w-3/4 h-3/4 border-2 border-black">
+        <div className="w-3/4 h-3/4 border-2 border-black flex z-2">
           <ReactFlow
             nodeTypes={nodeTypes}
             edgeTypes={edgeTypes}
@@ -114,25 +115,25 @@ export const Main = () => {
         {isOpen("biblinha") && (
           <BibleWindow name="biblinha" icon="bookopened" />
         )}
-        {isOpen("esperança.txt") && (
+        {isOpen("carta_aos_ouvintes.txt") && (
           <TextWindow
-            name="esperança.txt"
-            textItem={articles["esperança.txt"]}
+            name="carta_aos_ouvintes.txt"
+            textItem={articles["carta_aos_ouvintes.txt"]}
           />
         )}
-        {isOpen("poema.txt") && (
-          <TextWindow name="poema.txt" textItem={articles["poema.txt"]} />
+        {isOpen("esperanca.txt") && (
+          <TextWindow name="esperanca.txt" textItem={articles["esperanca.txt"]} />
         )}
-        {isOpen("carta_#01.txt") && (
+        {isOpen("fuga.txt") && (
           <TextWindow
-            name="carta_#01.txt"
-            textItem={articles["carta_#01.txt"]}
+            name="fuga.txt"
+            textItem={articles["fuga.txt"]}
           />
         )}
-        {isOpen("carta_#02.txt") && (
+        {isOpen("o_verde.txt") && (
           <TextWindow
-            name="carta_#02.txt"
-            textItem={articles["carta_#02.txt"]}
+            name="o_verde.txt"
+            textItem={articles["o_verde.txt"]}
           />
         )}
         {isOpen("producao_caseira_da_casa.png") && (
@@ -145,11 +146,24 @@ export const Main = () => {
         {isOpen("vitral_literal.png") && (
           <ImageWindow name="vitral_literal.png" imageName="vitral_literal" />
         )}
+         {isOpen("pra_vc_paulin.gif") && (
+          <ImageWindow name="pra_vc_paulin.gif" imageName="pra_vc_paulin" />
+        )}
+         {isOpen("redentor-01.gif") && (
+          <ImageWindow name="redentor-01.gif" imageName="redentor" />
+        )}
       </section>
     );
   return (
-    <section className="w-full h-full flex flex-col items-center justify-center bg-main">
-      <div className="relative w-4/5 h-4/5 border-2 border-black flex flex-col justify-evenly items-center">
+    <section className="w-full h-full flex flex-col items-center justify-center bg-[#364637]">
+      <div>
+        <img
+        src={gifSite}
+        alt="gif-site"
+        className="object-fill"
+      />
+      </div>
+      {/* <div className="relative w-4/5 h-4/5 border-2 border-black flex flex-col justify-evenly items-center">
         <img src={Vitral} alt={Vitral} className="object-cover h-full p-2 absolute top-0 left-0 opacity-50" />
         <a className="text-center border-2 border-black cursor-pointer text-black min-w-2/3 z-10 backdrop-blur-xs"  href="https://open.spotify.com/intl-pt/artist/1zJFoyxyn49Di48yHUH6dU?si=-1-RJjTOQmmYZzJyr9J1Pg" target="_blank" rel="noopener noreferrer" >
           <img
@@ -183,7 +197,7 @@ export const Main = () => {
             marginTop: -2,
           }}
         />
-      </div>
+      </div> */}
     </section>
   );
 };
