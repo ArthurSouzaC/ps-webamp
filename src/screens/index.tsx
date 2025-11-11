@@ -18,13 +18,11 @@ import { useWindowManager } from "../hooks/useWindowManager";
 import { shortcuts, shortcutsEdges } from "../data/shortcuts";
 import { docsEdges, docsNodes, imgsEdges, imgsNodes } from "../data/docs";
 import VitralLogo from "../assets/imgs/vitral.svg";
-import Vitral from "../assets/imgs/vitral_literal.png";
 import gifSite from "../assets/imgs/gif-site.gif";
 import { BibleWindow } from "../components/windows/bible-window";
 import { articles } from "../data/articles";
 import { ImageWindow } from "../components/windows/image-window";
 import { PlayerWindow } from "../components/windows/player-window";
-import { iconMap } from "../data/icons";
 
 export const Main = () => {
   const [nodes, setNodes] = useState<Node[]>(shortcuts);
