@@ -3,6 +3,8 @@ import { useDraggable } from "@reactuses/core";
 import prodCaseira from "../../assets/imgs/producao_caseira_da_casa.png";
 import uly6 from "../../assets/imgs/ULY6.png";
 import vitral from "../../assets/imgs/vitral_literal.png";
+import praVcPaulin from "../../assets/imgs/pra_vc_paulin.gif";
+import redentor from "../../assets/imgs/redentor-01.gif";
 import { useWindowManager } from "../../hooks/useWindowManager";
 
 interface Props {
@@ -14,6 +16,8 @@ const imageMap: { [key: string]: string } = {
   producao_caseira_da_casa: prodCaseira,
   ULY6: uly6,
   vitral_literal: vitral,
+  pra_vc_paulin: praVcPaulin,
+  redentor: redentor
 };
 
 export const ImageWindow = ({ name, imageName }: Props) => {
@@ -44,11 +48,11 @@ export const ImageWindow = ({ name, imageName }: Props) => {
         zIndex: windows[name].zIndex,
       }}
       className="border-2 border-[#A5A690] bg-black cursor-pointer text-[#A5A690]"
+      onClick={onWindowFocus}
     >
       <div
         ref={el}
         className="flex border-y-2 border-[#A5A690]  border-t-0 justify-between"
-        onClick={onWindowFocus}
       >
         <span className="font-helvetica font-bold uppercase py-2.5 px-4 text-sm select-none">
           {name}
@@ -62,7 +66,7 @@ export const ImageWindow = ({ name, imageName }: Props) => {
           </span>
         </button>
       </div>
-      <div className="py-3 px-4 cursor-default w-[500px]">
+      <div className="py-3 px-4 cursor-default max-w-[500px]">
         <img src={imageMap[imageName]} alt={imageName} />
       </div>
     </div>

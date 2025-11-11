@@ -24,6 +24,7 @@ export const PlayerWindow = ({ name }: Props) => {
     if (webampContainerRef.current) {
       const webamp = new Webamp({
         initialTracks: tracks,
+        zIndex: 3,
       });
 
       webamp.renderWhenReady(webampContainerRef.current);
@@ -37,6 +38,6 @@ export const PlayerWindow = ({ name }: Props) => {
   }, []);
 
   return (
-    <div className="absolute w-[725px] h-[464px]" ref={webampContainerRef}></div>
+    <div className="absolute w-[725px] h-[464px] flex z-0" ref={webampContainerRef}></div>
   );
 };

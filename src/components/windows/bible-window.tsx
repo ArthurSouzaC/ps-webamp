@@ -36,7 +36,7 @@ export const BibleWindow = ({ name, icon }: Props) => {
   const [indexes, setIndexes] = useState({
     card: 0,
     case: 1,
-    verse: 0,
+    verse: Math.floor(Math.random() * bibleVerses.length),
   });
 
   const getVerse = () => {
@@ -44,7 +44,7 @@ export const BibleWindow = ({ name, icon }: Props) => {
       setIndexes((prev) => ({
         card: (prev.card + 1) % cardColors.length,
         case: (prev.case + 1) % bibleCases.length,
-        verse: (prev.verse + 1) % bibleVerses.length,
+        verse: Math.floor(Math.random() * bibleVerses.length),
       }));
 
       animate(".card", { top: -200,  visibility: "visible"  });
@@ -76,6 +76,7 @@ export const BibleWindow = ({ name, icon }: Props) => {
               alt="bibleCases[index]"
               style={{
                 width: 400,
+                cursor: "pointer",
               }}
             />
             <motion.div
@@ -107,7 +108,7 @@ export const BibleWindow = ({ name, icon }: Props) => {
           </motion.div>
         </div>
       </div>
-      <div className="flex flex-col justify-between pb-19">
+      <div className="flex flex-col justify-between pb-19 cursor-default">
         <button
           className="border-b-2 border-l-2 border-black px-3 py-2 cursor-pointer"
           onClick={close}
