@@ -81,7 +81,7 @@ export const Main = () => {
             }}
           />
         </div>
-        <div className="w-3/4">
+        <div className="w-3/4 select-none">
           <img
             src={VitralLogo}
             alt={VitralLogo}
@@ -161,41 +161,6 @@ export const Main = () => {
         className="object-fill"
       />
       </div>
-      {/* <div className="relative w-4/5 h-4/5 border-2 border-black flex flex-col justify-evenly items-center">
-        <img src={Vitral} alt={Vitral} className="object-cover h-full p-2 absolute top-0 left-0 opacity-50" />
-        <a className="text-center border-2 border-black cursor-pointer text-black min-w-2/3 z-10 backdrop-blur-xs"  href="https://open.spotify.com/intl-pt/artist/1zJFoyxyn49Di48yHUH6dU?si=-1-RJjTOQmmYZzJyr9J1Pg" target="_blank" rel="noopener noreferrer" >
-          <img
-            className="ml-auto z-10"
-            src={iconMap["dark"]["note"]}
-            alt="note"
-          />
-
-          <span className="font-helvetica font-bold uppercase inline-block scale-y-200 text-3xl m-4 mt-2">
-            Spotify
-          </span>
-        </a>
-        <a className="text-center border-2 border-black cursor-pointer text-black min-w-2/3 z-10 backdrop-blur-xs"  href="https://www.youtube.com/@saulopoares" target="_blank" rel="noopener noreferrer">
-          <img
-            className="ml-auto z-10"
-            src={iconMap["dark"]["note"]}
-            alt="note"
-          />
-
-          <span className="font-helvetica font-bold uppercase inline-block scale-y-200 text-3xl m-4 mt-2">
-            Youtube
-          </span>
-        </a>
-      </div>
-      <div className="w-4/5">
-        <img
-          src={VitralLogo}
-          alt={VitralLogo}
-          style={{
-            marginRight: "auto",
-            marginTop: -2,
-          }}
-        />
-      </div> */}
     </section>
   );
 };
