@@ -128,10 +128,10 @@ export const Main = () => {
             textItem={articles["fuga.txt"]}
           />
         )}
-        {isOpen("o_verde.txt") && (
+        {isOpen("a_cor_verde.txt") && (
           <TextWindow
-            name="o_verde.txt"
-            textItem={articles["o_verde.txt"]}
+            name="a_cor_verde.txt"
+            textItem={articles["a_cor_verde.txt"]}
           />
         )}
         {isOpen("producao_caseira_da_casa.png") && (

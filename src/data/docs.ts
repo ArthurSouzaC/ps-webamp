@@ -26,11 +26,11 @@ export const docsNodes: Node[] = [
     },
   },
   {
-    id: "o_verde",
+    id: "a_cor_verde",
     type: "text-node",
     position: { x: 100, y: 240 },
     data: {
-      name: "o_verde.txt",
+      name: "a_cor_verde.txt",
     },
   },
 ];
@@ -98,10 +98,10 @@ export const docsEdges: Edge[] = [
     },
   },
   {
-    id: "fuga-o_verde",
+    id: "fuga-a_cor_verde",
     type: "straight-edge",
     source: "fuga",
-    target: "o_verde",
+    target: "a_cor_verde",
     style: {
       stroke: "#000",
     },
